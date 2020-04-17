@@ -1,5 +1,4 @@
-export default
-class Vec3 {
+export default class Vec3 {
   constructor(x = 0, y = x, z = x) {
     this.x = x;
     this.y = y;

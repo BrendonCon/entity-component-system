@@ -1,10 +1,9 @@
 import Component from './../core/Component.js';
 
-export default 
-class Sprite extends Component {
+export default class Sprite extends Component {
   constructor(src) {
     super();
     this.src = src;
-    this.texture = new Image(this.src);
+    this.texture = new Image();
   }
 }

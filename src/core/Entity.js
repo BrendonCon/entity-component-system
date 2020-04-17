@@ -1,5 +1,4 @@
-export default
-class Entity {
+export default class Entity {
   static id = 0;
 
   constructor() {

@@ -1,8 +1,7 @@
-export default
-class Engine {
+export default class Engine {
   constructor() {
     this.entities = [];
-    this.emitters = []; // could this just be components?
+    this.emitters = [];
     this.systems = [];
   }
 
@@ -16,11 +15,21 @@ class Engine {
     this.systems.push(system);
   }
 
+  getEntities() {
+    return this.entities.filter(entity => entity.active);
+  }
+
+  getEmitters() {
+    return this.emitters.filter(emitter => emitter.active);
+  }
+
+  getSystems() {
+    return this.systems.filter(system => system.active);
+  }
+
   update(deltaTime, time) {
-    this.systems
-      .filter(system => system.active)
-      .forEach(system => {
-        system.update(deltaTime, time);
-      });
+    this.getSystems().forEach(system => { 
+      system.update(deltaTime, time);
+    });
   }
 }

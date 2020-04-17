@@ -1,7 +1,6 @@
-export default
-class System {
+export default class System {
   constructor() {
-    this.engine = undefined;
+    this.emitter = undefined;
     this.active = true;
   }
 

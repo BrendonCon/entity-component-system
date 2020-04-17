@@ -1,51 +1,66 @@
 import System from './../core/System.js';
-import Particle from './../prefab/Particle.js';
+import Particle from './../prefabs/Particle.js';
 
-/*
-  Emitters are our entities
-  They will create particle entities
-  Have reference to the particles array and can remove/add at whim
-
-  PROBLEM: Hows does update get access to components list of emitter?
-*/
-
-export default
-class EmitterSystem extends System {
+export default class EmitterSystem extends System {
   init() {
-   this.engine.emitters.forEach((emitter, i) => {
+    this.engine.getEmitters().forEach(emitter => {
       let emission = emitter.components.emission;
       let emitterTransform = emitter.components.transform;
-      let emitterVelocity = emitter.components.physicsBody.velocity;
+      let emitterSprite = emitter.components.sprite;
+
+      emission.startIndex = this.engine.entities.length;
 
       for (let i = 0; i < emission.particleCount; i++) {
         let particle = new Particle();
-        let { transform, physicsBody } = particle.components;       
+        let particleComponents = particle.components;
+        let particleTransform = particleComponents.transform;    
+        let particlePhysicsBody = particleComponents.physicsBody;
+        let particleLife = particleComponents.life;
+        let particleSprite = particleComponents.sprite;
 
-        physicsBody.velocity.x = emitterVelocity.x;
-        physicsBody.velocity.y = emitterVelocity.y;
-        transform.position.x = emitterTransform.position.x;
-        transform.position.y = emitterTransform.position.y;
+        particleSprite.src = emitterSprite.src;
+        particleSprite.texture = emitterSprite.texture;
+  
+        particleLife.currentLife = Math.random() * 5000;
+        particleLife.maxLife = particleLife.currentLife;
+
+        let theta = 6.28 * Math.random();
+        particlePhysicsBody.velocity.x = Math.cos(theta);
+        particlePhysicsBody.velocity.y = Math.sin(theta);
+
+        particleTransform.position.x = emitterTransform.position.x;
+        particleTransform.position.y = emitterTransform.position.y;
         
         this.engine.entities.push(particle);
       }
-   });
+
+      emission.endIndex = this.engine.entities.length;
+    });
   }
 
-  update(deltaTime, time) {
-    let duration = Infinity;
+  update(deltaTime) {
+    this.engine.getEmitters().forEach(emitter => {
+      let emission = emitter.components.emission;
+      let emitterTransform = emitter.components.transform;
 
-    if (time < duration) {
-      let entities = this.engine.entities;
-      let rate = 150;
-      let index = (time / rate) % (entities.length) | 0;
-  
-      let particle = this.engine.entities[index];
-      let { transform } = particle.components;
-      particle.active = true;
+      emission.elapsed += deltaTime * emission.speed;
 
-      // needs to acccess emitter components somehow
-      transform.position.x = window.innerWidth * 0.5;
-      transform.position.y = window.innerHeight * 0.5;
-    }
+      if (emission.elapsed >= emission.rate) {
+        let entities = this.engine.entities;
+        let startIndex = emission.startIndex;
+        let endIndex = emission.endIndex;
+
+        let index = startIndex + (emission.index++ % (endIndex - startIndex));
+        let particle = entities[index];
+        let { transform, life } = particle.components;
+        
+        life.currentLife = life.maxLife;
+        particle.active = true;
+        transform.position.x = emitterTransform.position.x;
+        transform.position.y = emitterTransform.position.y;
+
+        emission.elapsed = 0;
+      }
+    });
   }
 }
