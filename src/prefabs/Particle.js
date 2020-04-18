@@ -1,4 +1,5 @@
 import Entity from './../core/Entity.js';
+import AlphaOverLife from './../components/AlphaOverLife.js';
 import Color from './../components/Color.js';
 import Transform from './../components/Transform.js';
 import PhysicsBody from './../components/PhysicsBody.js';
@@ -14,5 +15,6 @@ export default class Particle extends Entity {
     this.addComponent(new PhysicsBody());
     this.addComponent(new Life());
     this.addComponent(new Sprite());
+    this.addComponent(new AlphaOverLife());
   }
 }

@@ -25,6 +25,8 @@ import EulerSystem from './systems/EulerSystem.js';
 import LifeSystem from './systems/LifeSystem.js';
 import MouseSystem from './systems/MouseSystem.js';
 
+import Logger from './utils/Logger.js';
+
 export default {
   Core: {
     Component,
@@ -57,5 +59,8 @@ export default {
     EulerSystem,
     LifeSystem,
     MouseSystem
+  },
+  Utils: {
+    Logger
   }
 };

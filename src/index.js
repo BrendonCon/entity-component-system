@@ -1,5 +1,5 @@
-import Engine from './core/Engine.js';
-import Emitter from './prefabs/Emitter.js';
+import World from './core/World.js';
+import Entity from './core/Entity.js';
 
 import AlphaOverLife from './components/AlphaOverLife.js';
 import Transform from './components/Transform.js';
@@ -7,6 +7,7 @@ import Sprite from './components/Sprite.js';
 import PhysicsBody from './components/PhysicsBody.js';
 import Emission from './components/Emission.js';
 import Mouse from './components/Mouse.js';
+import Emitter from './components/Emitter.js';
 
 import AlphaOverLifeSystem from './systems/AlphaOverLifeSystem.js';
 import EulerSystem from './systems/EulerSystem.js';
@@ -16,27 +17,34 @@ import MouseSystem from './systems/MouseSystem.js';
 import LifeSystem from './systems/LifeSystem.js';
 import SpriteSystem from './systems/SpriteSystem.js';
 
-let canvas = document.getElementById('canvas');
-let engine = new Engine();
+// import Emitter from './prefabs/Emitter.js';
+import Particle from './prefabs/Particle.js';
 
-window.engine = engine;
+let canvas = document.getElementById('canvas');
+let engine = new World();
 
 function setup() {
-  let emitter = new Emitter();
+  let emitter = new Entity();
   emitter.addComponent(new Sprite('./assets/star_04.png'));
+  emitter.addComponent(new Transform());
+  emitter.addComponent(new Emission());
+  emitter.addComponent(new Emitter());
   emitter.components.transform.position.x = window.innerWidth * 0.25;
   emitter.components.transform.position.y = window.innerHeight * 0.5;
   emitter.addComponent(new Mouse());
-  engine.addEmitter(emitter);
+  engine.addEntity(emitter);
 
   let count = 4;
 
   for (let i = 0; i < count; i++) {
-    let emitter = new Emitter();
+    let emitter = new Entity();
     emitter.addComponent(new Sprite('./assets/radial.png'));
+    emitter.addComponent(new Transform());
+    emitter.addComponent(new Emission());
+    emitter.addComponent(new Emitter());
     emitter.components.transform.position.x = Math.random() * window.innerWidth;
     emitter.components.transform.position.y = Math.random() * window.innerHeight;
-    engine.addEmitter(emitter);
+    engine.addEntity(emitter);
   }
 
   engine.addSystem(new EulerSystem());
@@ -46,12 +54,6 @@ function setup() {
   engine.addSystem(new MouseSystem());
   engine.addSystem(new AlphaOverLifeSystem());
   engine.addSystem(new SpriteSystem());
-
-  window.what = () => {
-      engine.emitters.forEach(emitter => {
-      console.table(emitter.components.emission)
-    });
-  }
 }
 
 let prevTime = 0;  
@@ -65,9 +67,7 @@ function update(time) {
   engine.update(deltaTime, time);
 }
 
-function render() {
-  // TODO: Separate update and render cycles
-}
+function render() {}
 
 function loop(time = 0) {
   update(time);

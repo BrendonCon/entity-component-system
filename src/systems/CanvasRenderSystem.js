@@ -26,27 +26,27 @@ export default class Canvas extends System {
     this.bufferCtx.fillStyle = '#000000';
     this.bufferCtx.fillRect(0, 0, this.width, this.height);
 
-    this.engine.getEntities()
+    let entities = this.world.getEntitiesByComponents(['transform', 'color', 'sprite']);
+
+    entities
       .forEach(particle => {
         let { transform, color, sprite } = particle.components;
         let position = transform.position;
         let scale = transform.scale;
 
-        if (color) this.bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.alpha})`;
-
-        if (sprite && sprite.src) {
-          if (sprite.texture.complete) {
-            let w = sprite.texture.width;
-            let h = sprite.texture.height;
-            
-            this.bufferCtx.globalAlpha = Math.max(color.alpha, 0);
-            this.bufferCtx.save();
-            this.bufferCtx.translate(position.x, position.y);
-            this.bufferCtx.scale(scale.x, scale.y);
-            this.bufferCtx.rotate(transform.rotation.x);
-            this.bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
-            this.bufferCtx.restore();
-          }
+        this.bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.alpha})`;
+        
+        if (sprite.src && sprite.texture.complete) {
+          let w = sprite.texture.width;
+          let h = sprite.texture.height;
+          
+          this.bufferCtx.globalAlpha = Math.max(color.alpha, 0);
+          this.bufferCtx.save();
+          this.bufferCtx.translate(position.x, position.y);
+          this.bufferCtx.scale(scale.x, scale.y);
+          this.bufferCtx.rotate(transform.rotation.x);
+          this.bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
+          this.bufferCtx.restore();
         } else {
           this.bufferCtx.fillRect(position.x, position.y, 20, 20);
         }
@@ -56,6 +56,6 @@ export default class Canvas extends System {
   }
 
   destroy() {
-    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('resize', () => this.setDimensions());
   }
 }

@@ -16,8 +16,16 @@ export default class Entity {
     return this.components[name];
   }
 
+  getComponents(components) {
+    return components.map(component => this.components[component]);
+  }
+
   hasComponent(name) {
     return !!this.components[name];
+  }
+
+  hasComponents(components) {
+    return components.every(component => this.components[component]);
   }
 
   updateComponent(name, data) {
@@ -28,5 +36,9 @@ export default class Entity {
 
   removeComponent(name) {
     this.components[name] = null;
+  }
+
+  removeAllComponents() {
+    Object.keys(this.components).forEach(this.removeComponent);
   }
 }

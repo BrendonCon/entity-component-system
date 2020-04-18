@@ -6,5 +6,6 @@
 - Generate namespace file
 - Need asset(s) DONE
 - Need texture cache
-- Need to merge entities and emitters into one idea somehow
-- Might need
+- Need to merge entities and emitters into one idea somehow DONE
+- Some systems have update called even if no update functionality has been implemented
+- Do we need managers? SystemManager, EntityManager, ComponentManager?

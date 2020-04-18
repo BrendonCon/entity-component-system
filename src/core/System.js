@@ -1,6 +1,6 @@
 export default class System {
   constructor() {
-    this.emitter = undefined;
+    this.world = undefined;
     this.active = true;
   }
 

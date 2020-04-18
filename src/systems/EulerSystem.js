@@ -2,9 +2,10 @@ import System from '../core/System.js';
 
 export default class Euler extends System {
   update(deltaTime, time) {
-    this.engine.getEntities().forEach(entity => {
-      let { transform, physicsBody } = entity.components;
+    let entities = this.world.getEntitiesByComponents(['transform', 'physicsBody']);
 
+    entities.forEach(entity => {
+      let { transform, physicsBody } = entity.components;
 
       transform.rotation.x += physicsBody.angularVelocity.x;
       physicsBody.velocity.x += physicsBody.acceleration.x;

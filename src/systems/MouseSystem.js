@@ -6,12 +6,12 @@ export default class MouseSystem extends System {
   }
 
   setMouseCoords(e) {
-    this.engine.getEmitters().forEach(emitter => {
+    let entities = this.world.getEntitiesByComponents(['mouse', 'transform']);
+    
+    entities.forEach(emitter => {
       let { mouse, transform } = emitter.components;
-      if (mouse) {
-        mouse.x = transform.position.x = e.clientX;
-        mouse.y = transform.position.y = e.clientY;
-      }
+      mouse.x = transform.position.x = e.clientX;
+      mouse.y = transform.position.y = e.clientY;
     });
   }
 

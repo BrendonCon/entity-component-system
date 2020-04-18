@@ -1,13 +1,12 @@
 import System from './../core/System.js';
 
-export default class SpriteSystem {
+export default class SpriteSystem extends System {
   init() {
-    this.engine.entities.forEach(entity => {
-      let { sprite } = entity.components;
+    let entities = this.world.getEntitiesByComponents(['sprite']);
 
-      if (sprite && sprite.src) {
-        sprite.texture.src = sprite.src;
-      }
+    entities.forEach(entity => {
+      let { sprite } = entity.components;
+      sprite.texture.src = sprite.src;
     });
   }
 }

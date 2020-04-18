@@ -3,12 +3,14 @@ import Particle from './../prefabs/Particle.js';
 
 export default class EmitterSystem extends System {
   init() {
-    this.engine.getEmitters().forEach(emitter => {
+    let emitters = this.world.getEntitiesByComponents(['emitter']);
+
+    emitters.forEach(emitter => {
       let emission = emitter.components.emission;
       let emitterTransform = emitter.components.transform;
       let emitterSprite = emitter.components.sprite;
 
-      emission.startIndex = this.engine.entities.length;
+      emission.startIndex = this.world.getEntities().length;
 
       for (let i = 0; i < emission.particleCount; i++) {
         let particle = new Particle();
@@ -31,22 +33,24 @@ export default class EmitterSystem extends System {
         particleTransform.position.x = emitterTransform.position.x;
         particleTransform.position.y = emitterTransform.position.y;
         
-        this.engine.entities.push(particle);
+        this.world.addEntity(particle);
       }
 
-      emission.endIndex = this.engine.entities.length;
+      emission.endIndex = this.world.getEntities().length;
     });
   }
 
   update(deltaTime) {
-    this.engine.getEmitters().forEach(emitter => {
-      let emission = emitter.components.emission;
-      let emitterTransform = emitter.components.transform;
+    let emitters = this.world.getEntitiesByComponents(['emitter']);
+
+    emitters.forEach(emitter => {
+      let { emission } = emitter.components;
 
       emission.elapsed += deltaTime * emission.speed;
 
       if (emission.elapsed >= emission.rate) {
-        let entities = this.engine.entities;
+        let emitterTransform = emitter.components.transform;
+        let entities = this.world.getEntities();
         let startIndex = emission.startIndex;
         let endIndex = emission.endIndex;
 
