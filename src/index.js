@@ -21,39 +21,36 @@ import SpriteSystem from './systems/SpriteSystem.js';
 import Particle from './prefabs/Particle.js';
 
 let canvas = document.getElementById('canvas');
-let engine = new World();
+let world = new World();
 
 function setup() {
-  let emitter = new Entity();
-  emitter.addComponent(new Sprite('./assets/star_04.png'));
-  emitter.addComponent(new Transform());
-  emitter.addComponent(new Emission());
-  emitter.addComponent(new Emitter());
-  emitter.components.transform.position.x = window.innerWidth * 0.25;
-  emitter.components.transform.position.y = window.innerHeight * 0.5;
-  emitter.addComponent(new Mouse());
-  engine.addEntity(emitter);
-
   let count = 4;
 
   for (let i = 0; i < count; i++) {
     let emitter = new Entity();
-    emitter.addComponent(new Sprite('./assets/radial.png'));
+
+    if (i === 0) {
+      emitter.addComponent(new Mouse());
+      emitter.addComponent(new Sprite('./assets/star_04.png'));
+    } else {
+      emitter.addComponent(new Sprite('./assets/radial.png'));
+    }
+    
     emitter.addComponent(new Transform());
     emitter.addComponent(new Emission());
     emitter.addComponent(new Emitter());
     emitter.components.transform.position.x = Math.random() * window.innerWidth;
     emitter.components.transform.position.y = Math.random() * window.innerHeight;
-    engine.addEntity(emitter);
+    world.addEntity(emitter);
   }
 
-  engine.addSystem(new EulerSystem());
-  engine.addSystem(new CanvasRenderSystem(canvas));
-  engine.addSystem(new EmissionSystem());
-  engine.addSystem(new LifeSystem());
-  engine.addSystem(new MouseSystem());
-  engine.addSystem(new AlphaOverLifeSystem());
-  engine.addSystem(new SpriteSystem());
+  world.addSystem(new EulerSystem());
+  world.addSystem(new CanvasRenderSystem(canvas));
+  world.addSystem(new EmissionSystem());
+  world.addSystem(new LifeSystem());
+  world.addSystem(new MouseSystem());
+  world.addSystem(new AlphaOverLifeSystem());
+  world.addSystem(new SpriteSystem());
 }
 
 let prevTime = 0;  
@@ -64,7 +61,7 @@ function update(time) {
   prevTime = currentTime;
   currentTime = time;
   deltaTime = currentTime - prevTime;
-  engine.update(deltaTime, time);
+  world.update(deltaTime, time);
 }
 
 function render() {}

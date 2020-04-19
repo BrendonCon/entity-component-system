@@ -8,7 +8,7 @@ import Sprite from './components/Sprite.js';
 import Transform from './components/Transform.js';
 
 import Component from './core/Component.js';
-import Engine from './core/Engine.js';
+import Engine from './core/World.js';
 import Entity from './core/Entity.js';
 import System from './core/System.js';
 

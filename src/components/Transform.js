@@ -6,6 +6,6 @@ export default class Transform extends Component {
     super();
     this.position = new Vec3();
     this.scale = new Vec3(1);
-    this.rotation = new Vec3(10);
+    this.rotation = new Vec3();
   }
 }

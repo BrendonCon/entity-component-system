@@ -1,5 +1,5 @@
 ## ISSUES
-- Emitters components need to be avail
+- Emitters components need to be avail DONE
 - How do we handle parenting?
 - Best way to do import/export style and reason? DONE
 - Dynamic wake/asleep system?
@@ -8,4 +8,6 @@
 - Need texture cache
 - Need to merge entities and emitters into one idea somehow DONE
 - Some systems have update called even if no update functionality has been implemented
-- Do we need managers? SystemManager, EntityManager, ComponentManager?
+- Do we need managers? SystemManager, EntityManager, ComponentManager? PARTIAL
+- Naming collisions, Particle Componet and Particle Prefab, don't want to be saying Prefab and Component everywhere although already saying system when naming systems, do we need name spacing?
+- Object pool class? Use it in entity manager?
