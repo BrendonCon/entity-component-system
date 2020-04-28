@@ -1,11 +1,14 @@
-import System from './../core/System.js';
-import Particle from './../prefabs/Particle.js';
+import { System } from './../core/System.js';
+import { Particle } from './../prefabs/Particle.js';
 
-export default class EmitterSystem extends System {
+export class EmissionSystem extends System {
+  constructor() {
+    super();
+    this.components = ['emitter'];
+  }
+
   init() {
-    let emitters = this.world.getEntitiesByComponents(['emitter']);
-
-    emitters.forEach(emitter => {
+    this.entities.forEach(emitter => {
       let emission = emitter.components.emission;
       let emitterTransform = emitter.components.transform;
       let emitterSprite = emitter.components.sprite;
@@ -41,9 +44,7 @@ export default class EmitterSystem extends System {
   }
 
   update(deltaTime) {
-    let emitters = this.world.getEntitiesByComponents(['emitter']);
-
-    emitters.forEach(emitter => {
+    this.entities.forEach(emitter => {
       let { emission } = emitter.components;
 
       emission.elapsed += deltaTime * emission.speed;

@@ -1,11 +1,11 @@
-import Component from './../core/Component.js';
+import { Component } from './../core/Component.js';
 
-export default class Color extends Component {
-  constructor() {
+export class Color extends Component {
+  constructor(r = 255, g = r, b = r, a = 0) {
     super();
-    this.r = 255;
-    this.g = 255;
-    this.b = 255;
-    this.alpha = 1;
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.alpha = a;
   }
 }

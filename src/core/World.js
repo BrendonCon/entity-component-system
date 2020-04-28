@@ -1,10 +1,14 @@
-import EntityManager from './EntityManager.js';
-import SystemManager from './SystemManager.js';
+import { EntityManager } from './EntityManager.js';
+import { SystemManager } from './SystemManager.js';
+import { EventManager } from './EventManager.js';
+import { ComponentManager } from './ComponentManager.js';
 
-export default class World {
+export class World {
   constructor() {
-    this.systemManger = new SystemManager(this);
     this.entityManager = new EntityManager(this);
+    this.componentManager = new ComponentManager(this);
+    this.systemManger = new SystemManager(this);
+    this.eventManager = new EventManager();
     this.active = true;
   }
 
@@ -28,8 +32,12 @@ export default class World {
     return this.entityManager.getActiveEntities();
   }
 
-  getActiveEmitters() {
-    return this.emitters.filter(emitter => emitter.active);
+  play() {
+    this.active = true;
+  }
+
+  stop() {
+    this.active = false;
   }
 
   update(deltaTime, time) {

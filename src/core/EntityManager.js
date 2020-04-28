@@ -1,8 +1,8 @@
-import Entity from './Entity.js';
+import { Entity } from './Entity.js';
 
-export default class EntityManager {
+export class EntityManager {
   constructor(world) {
-    this.world = world;
+    this._world = world;
     this._entities = [];
   }
 

@@ -1,7 +1,7 @@
-import Component from './../core/Component.js';
-import Vec3 from './../math/Vec3.js';
+import { Component } from './../core/Component.js';
+import { Vec3 } from './../math/Vec3.js';
 
-export default class Transform extends Component {
+export class Transform extends Component {
   constructor() {
     super();
     this.position = new Vec3();

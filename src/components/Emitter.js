@@ -1,3 +1,3 @@
-import Component from './../core/Component.js';
+import { Component } from './../core/Component.js';
 
-export default class Emitter extends Component {}
+export class Emitter extends Component {}

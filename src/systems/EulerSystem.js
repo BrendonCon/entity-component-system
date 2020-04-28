@@ -1,10 +1,13 @@
-import System from '../core/System.js';
+import { System } from '../core/System.js';
 
-export default class Euler extends System {
+export class EulerSystem extends System {
+  constructor() {
+    super();
+    this.components = ['transform', 'physicsBody'];
+  }
+
   update(deltaTime, time) {
-    let entities = this.world.getEntitiesByComponents(['transform', 'physicsBody']);
-
-    entities.forEach(entity => {
+    this.entities.forEach(entity => {
       let { transform, physicsBody } = entity.components;
 
       transform.rotation.x += physicsBody.angularVelocity.x;

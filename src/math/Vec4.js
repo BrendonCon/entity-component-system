@@ -1,4 +1,4 @@
-export default class Vec4 {
+export class Vec4 {
   constructor(x = 0, y = x, z = x, w = x) {
     this.x = x;
     this.y = y;

@@ -1,6 +1,6 @@
-import Component from './../core/Component.js';
+import { Component } from './../core/Component.js';
 
-export default class AlphaOverLife extends Component {
+export class AlphaOverLife extends Component {
   constructor() {
     super();
     this.points = [];
