@@ -1,5 +1,4 @@
 import { World } from './core/World.js';
-import { Entity } from './core/Entity.js';
 
 import { AlphaOverLife } from './components/AlphaOverLife.js';
 import { Transform } from './components/Transform.js';
@@ -7,7 +6,6 @@ import { Sprite } from './components/Sprite.js';
 import { PhysicsBody } from './components/PhysicsBody.js';
 import { Emission } from './components/Emission.js';
 import { Mouse } from './components/Mouse.js';
-import { Emitter } from './components/Emitter.js';
 
 import { AlphaOverLifeSystem } from './systems/AlphaOverLifeSystem.js';
 import { EulerSystem } from './systems/EulerSystem.js';
@@ -16,33 +14,27 @@ import { CanvasRenderSystem } from './systems/CanvasRenderSystem.js';
 import { MouseSystem } from './systems/MouseSystem.js';
 import { LifeSystem } from './systems/LifeSystem.js';
 import { SpriteSystem } from './systems/SpriteSystem.js';
+import { SpawnSystem } from './systems/SpawnSystem.js';
+import { RandomPoisonSystem } from './systems/RandomPoisonSystem.js';
 
-// import Emitter from './prefabs/Emitter.js';
-import { Particle } from './prefabs/Particle.js';
+// HOW DO WE MOVE ALL OF THIS ELSEWHERE? MAKE THE IMPLEMENTED DO NO IMPORTS
+// import Emitter from './prefabs/Emitter.js'; // NS COLLISION
 
 let canvas = document.getElementById('canvas');
-let world = new World();
+window.world = new World();
 
 function setup() {
-  let count = 4;
+  let emitter = world.createEntity();
+  let emission = new Emission();
+  emission.active = false;
+  emitter.addComponent(emission);
+  emitter.addComponent(new Sprite('./assets/circle_01.png'));
 
-  for (let i = 0; i < count; i++) {
-    let emitter = new Entity();
-
-    if (i === 0) {
-      emitter.addComponent(new Mouse());
-      emitter.addComponent(new Sprite('./assets/star_04.png'));
-    } else {
-      emitter.addComponent(new Sprite('./assets/radial.png'));
-    }
-    
-    emitter.addComponent(new Transform());
-    emitter.addComponent(new Emission());
-    emitter.addComponent(new Emitter());
-    emitter.components.transform.position.x = Math.random() * window.innerWidth;
-    emitter.components.transform.position.y = Math.random() * window.innerHeight;
-    world.addEntity(emitter);
-  }
+  let t = new Transform();
+  t.position.x = window.innerWidth * 0.5;
+  t.position.y = window.innerHeight * 0.5;
+  emitter.addComponent(t);
+  world.addEntity(emitter);
 
   world.addSystem(new EulerSystem());
   world.addSystem(new CanvasRenderSystem(canvas));
@@ -51,6 +43,8 @@ function setup() {
   world.addSystem(new MouseSystem());
   world.addSystem(new AlphaOverLifeSystem());
   world.addSystem(new SpriteSystem());
+  world.addSystem(new SpawnSystem());
+  world.addSystem(new RandomPoisonSystem());
 }
 
 let prevTime = 0;  

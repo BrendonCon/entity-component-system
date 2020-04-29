@@ -38,6 +38,14 @@ export class Entity {
     this.components[name] = null;
   }
 
+  disableComponent(name) {
+    this.components[name].active = false;
+  }
+
+  enableComponent(name) {
+    this.components[name].active = true;
+  }
+
   removeAllComponents() {
     Object.keys(this.components).forEach(this.removeComponent);
   }

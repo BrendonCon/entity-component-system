@@ -18,6 +18,15 @@ export class EventManager {
     this._events[name].forEach(listener => listener(data));
   }
 
+  getListenerCount(name) {
+    return this._events[name] && this._events[name].length || -1;
+  }
+
+  getTotalListenerCount() {
+    return Object.keys(this._events)
+      .reduce((total, current) => total + this._events[current].length, 0);
+  }
+
   sub(name, fn) {
     this.subscribe(name, fn);
   }
@@ -64,13 +73,5 @@ export class EventManager {
 
   onEvent(name, fn) {
     this.subscribe(name, fn);
-  }
-
-  getListenerCount(name) {
-    return this._events[name] && this._events[name].length || -1;
-  }
-
-  getTotalListenerCount() {
-    return -1;
   }
 }

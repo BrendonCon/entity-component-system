@@ -1,16 +1,13 @@
 import { Component } from '../core/Component.js';
 
 export class Emission extends Component {
-  constructor() {
-    super();
-    this.particleCount = 50;
-    this.emitAmount = 1;
-    this.rate = 50;
-    this.duration = Infinity;
-    this.elapsed = this.rate;
-    this.index = 0;
-    this.startIndex = 0;
-    this.endIndex = 0;
-    this.speed = 1;
-  }
+  particleCount = 50;
+  emitAmount = 1;
+  rate = 50;
+  duration = Infinity;
+  elapsed = this.rate;
+  index = 0;
+  startIndex = 0;
+  endIndex = 0;
+  speed = 1;
 }

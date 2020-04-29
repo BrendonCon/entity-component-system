@@ -1,11 +1,15 @@
 export class SystemManager {
-  constructor(world) {
+  constructor() {
+    this._Systems = [];
     this._systems = [];
-    this._world = world;
   }
 
-  addSystem(system) {
-    system.world = this._world;
+  registerSystem(System) {
+    !this._Systems[System] && (this._Systems[System] = System);
+  }
+
+  addSystem(system, world) {
+    system.world = world;
     system.init();
     this._systems.push(system);
   }
@@ -20,13 +24,18 @@ export class SystemManager {
   }
 
   getSystemByName(name) {
-    return this._systems.filter(system => {
+    return this._systems.find(system => {
       return system.constructor.name === name;
     });
   }
 
   getSystemIndex(system) {
     return this._systems.indexOf(system);
+  }
+
+  getSystem(system) {
+    let index = this.getSystemIndex(system);
+    return (index != -1) && this._systems[index];
   }
 
   getSystems() {
@@ -45,18 +54,14 @@ export class SystemManager {
     return this._systems.filter(system => !system.active);
   }
 
-  activateSystem() {
-
-  }
-
-  deactivateSystem() {
-
+  init() {
+    this._systems.forEach(system => system.init());
   }
 
   update(deltaTime, time) {
-    this.getActiveSystems().forEach(system => {
-      system.update(deltaTime, time);
-    });
+    this._systems
+      .filter(system => system.active)
+      .forEach(system => system.update(deltaTime, time));
   }
 
   destroy() {

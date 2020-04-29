@@ -1,17 +1,15 @@
 import { System } from '../core/System.js';
 
 export class MouseSystem extends System {
-  constructor() {
-    super();
-    this.components = ['mouse', 'transform'];
-  }
+  components = ['mouse', 'transform'];
+
   init() {
     window.addEventListener('mousemove', (e) => this.setMouseCoords(e));
   }
 
   setMouseCoords(e) {
-    this.entities.forEach(emitter => {
-      let { mouse, transform } = emitter.components;
+    this.entities.forEach(entity => {
+      let { mouse, transform } = entity.components;
       mouse.x = transform.position.x = e.clientX;
       mouse.y = transform.position.y = e.clientY;
     });

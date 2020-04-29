@@ -1,10 +1,7 @@
 import { System } from './../core/System.js';
 
 export class LifeSystem extends System {
-  constructor() {
-    super();
-    this.components = ['life'];
-  }
+  components = ['life'];
 
   update(deltaTime) {
     this.entities.forEach(particle => {
@@ -14,7 +11,7 @@ export class LifeSystem extends System {
         life.currentLife -= deltaTime * life.multiplier;
       } else {
         particle.active = false;
-        this.world.eventManager.trigger('death', particle);
+        this.world.eventManager.trigger('death', particle); // TODO: Settle on API
       }
     });
   }

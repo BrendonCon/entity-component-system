@@ -2,10 +2,7 @@ import { System } from './../core/System.js';
 import { Particle } from './../prefabs/Particle.js';
 
 export class EmissionSystem extends System {
-  constructor() {
-    super();
-    this.components = ['emitter'];
-  }
+  components = ['emission', 'sprite'];
 
   init() {
     this.entities.forEach(emitter => {
@@ -13,7 +10,7 @@ export class EmissionSystem extends System {
       let emitterTransform = emitter.components.transform;
       let emitterSprite = emitter.components.sprite;
 
-      emission.startIndex = this.world.getEntities().length;
+      emission.startIndex = this.world.getEntityCount();
 
       for (let i = 0; i < emission.particleCount; i++) {
         let particle = new Particle();
@@ -39,7 +36,7 @@ export class EmissionSystem extends System {
         this.world.addEntity(particle);
       }
 
-      emission.endIndex = this.world.getEntities().length;
+      emission.endIndex = this.world.getEntityCount();
     });
   }
 
@@ -51,7 +48,7 @@ export class EmissionSystem extends System {
 
       if (emission.elapsed >= emission.rate) {
         let emitterTransform = emitter.components.transform;
-        let entities = this.world.getEntities();
+        let entities = this.world.getAllEntities();
         let startIndex = emission.startIndex;
         let endIndex = emission.endIndex;
 
@@ -61,6 +58,10 @@ export class EmissionSystem extends System {
         
         life.currentLife = life.maxLife;
         particle.active = true;
+
+        particle.components.physicsBody.acceleration.x = (Math.random() - 0.5) * 10;
+        particle.components.physicsBody.acceleration.y = (Math.random() - 0.5) * 10;
+
         transform.position.x = emitterTransform.position.x;
         transform.position.y = emitterTransform.position.y;
 

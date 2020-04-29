@@ -11,3 +11,7 @@
 - Do we need managers? SystemManager, EntityManager, ComponentManager? PARTIAL
 - Naming collisions, Particle Componet and Particle Prefab, don't want to be saying Prefab and Component everywhere although already saying system when naming systems, do we need name spacing?
 - Object pool class? Use it in entity manager?
+- Pick event system interface and stick to it
+- Decorators?
+- Add tick rate to systems to allow them to be called at different rates?
+- Is priority for systems needed?

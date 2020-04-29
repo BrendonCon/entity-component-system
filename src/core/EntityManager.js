@@ -1,8 +1,7 @@
 import { Entity } from './Entity.js';
 
 export class EntityManager {
-  constructor(world) {
-    this._world = world;
+  constructor() {
     this._entities = [];
   }
 
@@ -39,6 +38,12 @@ export class EntityManager {
   }
 
   getEntitiesByComponents(components) {
-    return this._entities.filter(entity => entity.hasComponents(components));
+    return this._entities
+      .filter(entity => entity.hasComponents(components));
+  }
+
+  getEntitiesComponents() {
+    return this.getEntitiesByComponents()
+      .map(entity => entity.components);
   }
 }
