@@ -36,6 +36,9 @@ function setup() {
   emitter.addComponent(t);
   world.addEntity(emitter);
 
+  console.log(emitter.getComponentByType(Transform));
+  console.log(emitter.hasComponentType(AlphaOverLife));
+
   world.addSystem(new EulerSystem());
   world.addSystem(new CanvasRenderSystem(canvas));
   world.addSystem(new EmissionSystem());
@@ -45,6 +48,8 @@ function setup() {
   world.addSystem(new SpriteSystem());
   world.addSystem(new SpawnSystem());
   world.addSystem(new RandomPoisonSystem());
+
+  console.log(world.getEntitiesByComponentTypes([Transform, Sprite]));
 }
 
 let prevTime = 0;  

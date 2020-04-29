@@ -1,8 +1,10 @@
 import { System } from './../core/System.js';
 import { Particle } from './../prefabs/Particle.js';
+import { Emission } from './../components/Emission.js';
+import { Sprite } from './../components/Sprite.js';
 
 export class EmissionSystem extends System {
-  components = ['emission', 'sprite'];
+  components = [Emission, Sprite];
 
   init() {
     this.entities.forEach(emitter => {

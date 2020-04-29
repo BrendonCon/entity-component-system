@@ -37,6 +37,14 @@ export class EntityManager {
     return this._entities.filter(entity => entity.hasComponent(name));
   }
 
+  getEntitiesByComponentType(Type) {
+    return this._entities.filter(entity => entity.hasComponentType(Type));
+  }
+
+  getEntitiesByComponentTypes(type) {
+    return this._entities.filter(entity => entity.hasComponentTypes(type));
+  }
+
   getEntitiesByComponents(components) {
     return this._entities
       .filter(entity => entity.hasComponents(components));

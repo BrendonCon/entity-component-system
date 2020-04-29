@@ -1,7 +1,10 @@
 import { System } from './../core/System.js';
+import { Color } from './../components/Color.js';
+import { Life } from './../components/Life.js';
+import { AlphaOverLife } from './../components/AlphaOverLife.js';
 
 export class AlphaOverLifeSystem extends System {
-  components = ['life', 'color', 'alphaOverLife'];
+  components = [Life, Color, AlphaOverLife];
 
   update() {
     this.entities.forEach(entity => {

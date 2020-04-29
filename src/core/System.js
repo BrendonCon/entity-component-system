@@ -4,7 +4,7 @@ export class System {
   components = [];
 
   get entities() {
-    return this.world.getEntitiesByComponents(this.components);
+    return this.world.getEntitiesByComponentTypes(this.components);
   }
 
   play() {

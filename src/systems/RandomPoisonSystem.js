@@ -1,7 +1,8 @@
 import { System } from './../core/System.js';
+import { Color } from './../components/Color.js';
 
 export class RandomPoisonSystem extends System {
-  components = ['color'];
+  components = [Color];
   spawnTime = 3000;
   delta = this.spawnTime;
 

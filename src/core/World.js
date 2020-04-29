@@ -32,6 +32,10 @@ export class World {
     return this.entityManager.getEntitiesByComponents(components);
   }
 
+  getEntitiesByComponentTypes(types) {
+    return this.entityManager.getEntitiesByComponentTypes(types);
+  }
+
   getActiveEntities() {
     return this.entityManager.getActiveEntities();
   }

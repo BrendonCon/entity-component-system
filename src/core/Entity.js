@@ -12,12 +12,24 @@ export class Entity {
     this.components[component.name] = component;
   }
 
-  getComponent(name) {
+  getComponentByName(name) {
     return this.components[name];
   }
 
-  getComponents(components) {
+  getComponentsByName(components) {
     return components.map(component => this.components[component]);
+  }
+
+  getComponentByType(Type) {
+    return Object.values(this.components).find(component => component instanceof Type);
+  }
+
+  hasComponentType(Type) {
+    return !!this.getComponentByType(Type);
+  }
+
+  hasComponentTypes(types) {
+    return types.every(type => this.hasComponentType(type));
   }
 
   hasComponent(name) {
@@ -38,15 +50,15 @@ export class Entity {
     this.components[name] = null;
   }
 
+  removeComponents() {
+    Object.keys(this.components).forEach(this.removeComponent);
+  }
+
   disableComponent(name) {
     this.components[name].active = false;
   }
 
   enableComponent(name) {
     this.components[name].active = true;
-  }
-
-  removeAllComponents() {
-    Object.keys(this.components).forEach(this.removeComponent);
   }
 }

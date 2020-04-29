@@ -1,14 +1,17 @@
 import { System } from '../core/System.js';
+import { Transform } from './../components/Transform.js';
+import { Color } from './../components/Color.js';
 
 export class CanvasRenderSystem extends System {
-  components = ['transform', 'color'];
+  components = [Transform, Color];
 
   constructor(canvas) {
     super();
     this.canvas = canvas;
-    this.ctx = this.canvas.getContext('2d', { alpha: false });
+    this.opts = { alpha: false, depth: false, antialias: false, stencil: false, desynchronized: false };
+    this.ctx = this.canvas.getContext('2d', this.opts);
     this.buffer = document.createElement('canvas');
-    this.bufferCtx = this.buffer.getContext('2d', { alpha: false });
+    this.bufferCtx = this.buffer.getContext('2d', this.opts);
     this.width = window.innerWidth;
     this.height = window.innerHeight;
   }
