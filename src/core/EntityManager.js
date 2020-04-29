@@ -5,6 +5,10 @@ export class EntityManager {
     this._entities = [];
   }
 
+  get entities() {
+    return this._entities.filter(entity => entity.active);
+  }
+
   createEntity() {
     return new Entity();
   }
@@ -21,32 +25,28 @@ export class EntityManager {
     return this._entities.length;
   }
 
-  getActiveEntities() {
-    return this._entities.filter(entity => entity.active);
-  }
-
   getEntityByName(name) {
-    return this._entities.filter(entity => entity.name === name);
+    return this.entities.filter(entity => entity.name === name);
   }
 
   getEntityById(id) {
-    return this._entities.filter(entity => entity.id === id);
+    return this.entities.filter(entity => entity.id === id);
   }
 
   getEntitiesByComponent(name) {
-    return this._entities.filter(entity => entity.hasComponent(name));
+    return this.entities.filter(entity => entity.hasComponent(name));
   }
 
   getEntitiesByComponentType(Type) {
-    return this._entities.filter(entity => entity.hasComponentType(Type));
+    return this.entities.filter(entity => entity.hasComponentType(Type));
   }
 
   getEntitiesByComponentTypes(type) {
-    return this._entities.filter(entity => entity.hasComponentTypes(type));
+    return this.entities.filter(entity => entity.hasComponentTypes(type));
   }
 
   getEntitiesByComponents(components) {
-    return this._entities
+    return this.entities
       .filter(entity => entity.hasComponents(components));
   }
 

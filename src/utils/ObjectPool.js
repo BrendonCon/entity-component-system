@@ -15,7 +15,7 @@ export class ObjectPool {
     }
   }
   
-  alloc() {
+  allocate() {
     if (!this.freeIndex) {
       throw new Error('Grow your object pool!'); 
     }
@@ -23,7 +23,7 @@ export class ObjectPool {
     return this.pool[this.pool.length - this.freeIndex--];
   }
   
-  dealloc(obj) {
+  deallocate(obj) {
     this.pool[this.freeIndex++] = obj;
   }
   

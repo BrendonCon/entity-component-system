@@ -1,7 +1,7 @@
 import { Component } from '../core/Component.js';
 
 export class Emission extends Component {
-  particleCount = 50;
+  particleCount = 25;
   emitAmount = 1;
   rate = 50;
   duration = Infinity;

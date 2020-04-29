@@ -16,6 +16,5 @@ export class System {
   }
 
   init() {}
-  update() {}
   destroy() {}
 }

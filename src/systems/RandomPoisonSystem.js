@@ -3,7 +3,7 @@ import { Color } from './../components/Color.js';
 
 export class RandomPoisonSystem extends System {
   components = [Color];
-  spawnTime = 3000;
+  spawnTime = 300;
   delta = this.spawnTime;
 
   update(deltaTime) {

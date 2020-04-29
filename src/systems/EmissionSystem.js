@@ -22,6 +22,8 @@ export class EmissionSystem extends System {
         let particleLife = particleComponents.life;
         let particleSprite = particleComponents.sprite;
 
+        particle.active = false;
+
         particleSprite.src = emitterSprite.src;
         particleSprite.texture = emitterSprite.texture;
   

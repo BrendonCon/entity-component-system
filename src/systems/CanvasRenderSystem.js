@@ -8,7 +8,7 @@ export class CanvasRenderSystem extends System {
   constructor(canvas) {
     super();
     this.canvas = canvas;
-    this.opts = { alpha: false, depth: false, antialias: false, stencil: false, desynchronized: false };
+    this.opts = { alpha: false, depth: false, antialias: false, stencil: true };
     this.ctx = this.canvas.getContext('2d', this.opts);
     this.buffer = document.createElement('canvas');
     this.bufferCtx = this.buffer.getContext('2d', this.opts);
