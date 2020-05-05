@@ -1,8 +1,7 @@
-# WIP: Particle Engine
-This is a simple experimental repo toying with Entity Component Systems and particles. The intent is exploration and I am not yet focussed on performance.
+# WIP: Entity Component System
+This is a simple experimental and learning repo toying with Entity Component Systems as a simulation engine. 
 
 ## Setup
 - Pull down the repo
 - install the node modules, run `npm i`
 - now run `npm start`
-

@@ -17,9 +17,6 @@ import { SpriteSystem } from './systems/SpriteSystem.js';
 import { SpawnSystem } from './systems/SpawnSystem.js';
 import { RandomPoisonSystem } from './systems/RandomPoisonSystem.js';
 
-// HOW DO WE MOVE ALL OF THIS ELSEWHERE? MAKE THE IMPLEMENTED DO NO IMPORTS
-// import Emitter from './prefabs/Emitter.js'; // NS COLLISION
-
 let canvas = document.getElementById('canvas');
 window.world = new World();
 
@@ -36,9 +33,6 @@ function setup() {
   emitter.addComponent(t);
   world.addEntity(emitter);
 
-  console.log(emitter.getComponentByType(Transform));
-  console.log(emitter.hasComponentType(AlphaOverLife));
-
   world.addSystem(new EulerSystem());
   world.addSystem(new CanvasRenderSystem(canvas));
   world.addSystem(new EmissionSystem());
@@ -48,8 +42,6 @@ function setup() {
   world.addSystem(new SpriteSystem());
   world.addSystem(new SpawnSystem());
   world.addSystem(new RandomPoisonSystem());
-
-  console.log(world.getEntitiesByComponentTypes([Transform, Sprite]));
 }
 
 let prevTime = 0;  

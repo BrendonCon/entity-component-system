@@ -56,10 +56,6 @@ export class World {
     this.active = false;
   }
 
-  init() {
-    this.systemManger.init();
-  }
-
   update(deltaTime, time) {
     this.active && this.systemManager.update(deltaTime, time);
   }

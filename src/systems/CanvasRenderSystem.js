@@ -7,11 +7,11 @@ export class CanvasRenderSystem extends System {
 
   constructor(canvas) {
     super();
-    this.canvas = canvas;
-    this.opts = { alpha: false, depth: false, antialias: false, stencil: true };
-    this.ctx = this.canvas.getContext('2d', this.opts);
-    this.buffer = document.createElement('canvas');
-    this.bufferCtx = this.buffer.getContext('2d', this.opts);
+    this._canvas = canvas;
+    this._opts = { alpha: false, depth: false, antialias: false, stencil: true };
+    this._ctx = this._canvas.getContext('2d', this._opts);
+    this._buffer = document.createElement('canvas');
+    this._bufferCtx = this._buffer.getContext('2d', this._opts);
     this.width = window.innerWidth;
     this.height = window.innerHeight;
   }
@@ -22,37 +22,37 @@ export class CanvasRenderSystem extends System {
   }
 
   setDimensions() {
-    this.buffer.width = this.canvas.width = this.width = window.innerWidth;
-    this.buffer.height = this.canvas.height = this.height = window.innerHeight;
+    this._buffer.width = this._canvas.width = this.width = window.innerWidth;
+    this._buffer.height = this._canvas.height = this.height = window.innerHeight;
   }
 
   update() {
-    this.bufferCtx.fillRect(0, 0, this.width, this.height);
+    this._bufferCtx.fillRect(0, 0, this.width, this.height);
 
-    this.entities.forEach(particle => {
-      let { transform, color, sprite } = particle.components;
+    this.entities.forEach(entity => {
+      let { transform, color, sprite } = entity.components;
       let position = transform.position;
       let scale = transform.scale;
       
-      this.bufferCtx.save();
-      this.bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-      this.bufferCtx.globalAlpha = Math.max(color.alpha, 0);
-      this.bufferCtx.translate(position.x, position.y);
-      this.bufferCtx.scale(scale.x, scale.y);
-      this.bufferCtx.rotate(transform.rotation.x);
+      this._bufferCtx.save();
+      this._bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+      this._bufferCtx.globalAlpha = Math.max(color.alpha, 0);
+      this._bufferCtx.translate(position.x, position.y);
+      this._bufferCtx.scale(scale.x, scale.y);
+      this._bufferCtx.rotate(transform.rotation.x);
 
       if (sprite && sprite.src && sprite.image.complete) {
         let w = sprite.texture.width;
         let h = sprite.texture.height;
-        this.bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
+        this._bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
       } else {
-        this.bufferCtx.fillRect(-10, -10, 20, 20);
+        this._bufferCtx.fillRect(-10, -10, 20, 20);
       }
       
-      this.bufferCtx.restore();
+      this._bufferCtx.restore();
     });
 
-    this.ctx.drawImage(this.buffer, 0, 0, this.width, this.height);
+    this._ctx.drawImage(this._buffer, 0, 0, this.width, this.height);
   }
 
   destroy() {
