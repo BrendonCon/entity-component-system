@@ -20,14 +20,6 @@ export class SystemManager {
     return (index != -1) && this._systems[index];
   }
 
-  getSystems() {
-    return this._systems;
-  }
-
-  getSystemCount() {
-    return this._systems.length;
-  }
-
   getActiveSystems() {
     return this._systems.filter(system => system.active);
   }
