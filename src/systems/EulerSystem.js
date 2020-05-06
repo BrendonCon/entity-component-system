@@ -3,7 +3,10 @@ import { Transform } from '../components/Transform.js';
 import { PhysicsBody } from '../components/PhysicsBody.js';
 
 export class EulerSystem extends System {
-  components = [Transform, PhysicsBody];
+  constructor() {
+    super();
+    this.components = [Transform, PhysicsBody];
+  }
 
   update(deltaTime, time) {
     this.entities.forEach(entity => {

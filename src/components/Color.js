@@ -1,8 +1,11 @@
 import { Component } from './../core/Component.js';
 
 export class Color extends Component {
-  r = 255;
-  g = 255;
-  b = 255;
-  a = 1;
+  constructor(opts = {}) {
+    super();
+    this.r = opts.r || 255;
+    this.g = opts.g || 255;
+    this.b = opts.b || 255;
+    this.a = opts.a || 1;
+  }
 }

@@ -1,7 +1,9 @@
 export class System {
-  world = undefined;
-  active = true;
-  components = [];
+  constructor() {
+    this.world = undefined;
+    this.active = true;
+    this.components = [];
+  }
 
   get entities() {
     return this.world.getEntitiesByComponentTypes(this.components);

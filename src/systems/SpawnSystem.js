@@ -2,9 +2,12 @@ import { System } from './../core/System.js';
 import { Enemy } from './../prefabs/Enemy.js';
 
 export class SpawnSystem extends System {
-  spawnTime = 2;
-  delta = this.spawnTime;
-  active = false;
+  constructor() {
+    super();
+    this.spawnTime = 2;
+    this.delta = this.spawnTime;
+    this.active = false;
+  }
 
   update(deltaTime) {
     this.delta += deltaTime;

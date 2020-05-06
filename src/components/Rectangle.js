@@ -1,6 +1,9 @@
 import { Component } from './../core/Component.js';
 
 export class Rectangle extends Component {
-  height = 20;
-  width = 20;
+  constructor(width = 20, height = width) {
+    super();
+    this.width = width;
+    this.height = height;
+  }
 }

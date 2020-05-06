@@ -3,7 +3,10 @@ import { Mouse } from '../components/Mouse.js';
 import { Transform } from '../components/Transform.js';
 
 export class MouseSystem extends System {
-  components = [Mouse, Transform];
+  constructor() {
+    super();
+    this.components = [Mouse, Transform];
+  }
 
   init() {
     window.addEventListener('mousemove', (e) => this.setMouseCoords(e));

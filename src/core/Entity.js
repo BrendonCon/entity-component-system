@@ -9,7 +9,9 @@ export class Entity {
   }
 
   addComponent(component) {
-    this.components[component.name] = component;
+    let protoName = component.constructor.name;
+    let name = `${protoName.charAt(0).toLowerCase()}${protoName.slice(1)}`;
+    this.components[name] = component;
   }
 
   getComponentByName(name) {
@@ -40,25 +42,7 @@ export class Entity {
     return components.every(component => this.components[component]);
   }
 
-  updateComponent(name, data) {
-    Object.keys(data).forEach(key => {
-      this.components[name][key] = data[key];
-    });
-  }
-
   removeComponent(name) {
     this.components[name] = null;
-  }
-
-  removeComponents() {
-    Object.keys(this.components).forEach(this.removeComponent);
-  }
-
-  disableComponent(name) {
-    this.components[name].active = false;
-  }
-
-  enableComponent(name) {
-    this.components[name].active = true;
   }
 }
