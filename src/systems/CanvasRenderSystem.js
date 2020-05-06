@@ -33,8 +33,8 @@ export class CanvasRenderSystem extends System {
       let { transform, color, sprite } = entity.components;
       let position = transform.position;
       let scale = transform.scale;
-      let w = sprite.image.width * transform.scale.x;
-      let h = sprite.image.height * transform.scale.y;
+      let w = sprite.image.width;
+      let h = sprite.image.height;
 
       this._bufferCtx.save();
       this._bufferCtx.globalAlpha = Math.max(color.alpha, 0);

@@ -56,6 +56,12 @@ export let Prefabs = {
   Enemy
 };
 
+import { Logger } from './utils/Logger.js';
+
+export let Utils = {
+  Logger
+};
+
 import { World } from './core/World.js';
 import { Entity } from './core/Entity.js';
 import { Component } from './core/Component.js';
@@ -69,4 +75,5 @@ export default {
   System,
   Entity,
   Prefabs,
+  Utils
 };

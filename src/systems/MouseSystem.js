@@ -15,8 +15,8 @@ export class MouseSystem extends System {
   setMouseCoords(e) {
     this.entities.forEach(entity => {
       let { mouse, transform } = entity.components;
-      mouse.x = transform.position.x = e.clientX;
-      mouse.y = transform.position.y = e.clientY;
+      transform.position.x = e.clientX;
+      transform.position.y = e.clientY;
     });
   }
 

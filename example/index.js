@@ -8,6 +8,7 @@ document.body.appendChild(stats.dom);
 
 function setup() {
   let emitter = new Ecs.Prefabs.Emitter();
+  emitter.addComponent(new Ecs.Components.Mouse());
   emitter.components.sprite.src = './assets/radial.png';
   emitter.components.transform.position.x = window.innerWidth * 0.5;
   emitter.components.transform.position.y = window.innerHeight * 0.5;
@@ -36,12 +37,9 @@ function update(time) {
   world.update(deltaTime, time);
 }
 
-function render() {}
-
 function loop(time = 0) {
   stats.begin();
   update(time);
-  render();
   stats.end();
   requestAnimationFrame(loop);
 }

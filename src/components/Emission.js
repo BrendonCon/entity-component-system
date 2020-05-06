@@ -3,7 +3,7 @@ import { Component } from '../core/Component.js';
 export class Emission extends Component {
   constructor() {
     super();
-    this.particleCount = 50;
+    this.particleCount = 100;
     this.emitAmount = 1;
     this.rate = 10;
     this.duration = Infinity;
