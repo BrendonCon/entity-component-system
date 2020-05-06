@@ -3,7 +3,6 @@ export class Entity {
 
   constructor() {
     this.id = Entity.id++;
-    this.name = '';
     this.active = true;
     this.components = {};
   }
@@ -14,35 +13,15 @@ export class Entity {
     this.components[name] = component;
   }
 
-  getComponentByName(name) {
-    return this.components[name];
-  }
-
-  getComponentsByName(components) {
-    return components.map(component => this.components[component]);
-  }
-
-  getComponentByType(Type) {
+  getComponent(Type) {
     return Object.values(this.components).find(component => component instanceof Type);
   }
 
-  hasComponentType(Type) {
-    return !!this.getComponentByType(Type);
+  hasComponent(Type) {
+    return !!this.getComponent(Type);
   }
 
-  hasComponentTypes(types) {
-    return types.every(type => this.hasComponentType(type));
-  }
-
-  hasComponent(name) {
-    return !!this.components[name];
-  }
-
-  hasComponents(components) {
-    return components.every(component => this.components[component]);
-  }
-
-  removeComponent(name) {
-    this.components[name] = null;
+  hasComponents(types) {
+    return types.every(type => this.hasComponent(type));
   }
 }

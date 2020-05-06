@@ -6,7 +6,7 @@ export class PhysicsBody extends Component {
     super();
     this.mass = 1;
     this.velocity = new Vec3();
-    this.acceleration = new Vec3(Math.random() - 0.5, Math.random() - 0.5);
+    this.acceleration = new Vec3();
     this.angularVelocity = new Vec3();
     this.angularAcceleration = new Vec3();
     this.friction = new Vec3(0.985);

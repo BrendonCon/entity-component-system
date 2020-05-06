@@ -5,5 +5,6 @@ export class Sprite extends Component {
     super();
     this.src = '';
     this.image = new Image();
+    this.image.src = this.src; // this will make an instance per every sprite, we must look up in the texture system
   }
 }

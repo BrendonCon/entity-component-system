@@ -28,7 +28,7 @@ export class EmissionSystem extends System {
         particle.active = false;
 
         particleSprite.src = emitterSprite.src;
-        particleSprite.texture = emitterSprite.texture;
+        particleSprite.image = emitterSprite.image;
   
         particleLife.currentLife = Math.random() * 5000;
         particleLife.maxLife = particleLife.currentLife;

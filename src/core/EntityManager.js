@@ -25,33 +25,11 @@ export class EntityManager {
     return this._entities.length;
   }
 
-  getEntityByName(name) {
-    return this.entities.filter(entity => entity.name === name);
-  }
-
-  getEntityById(id) {
-    return this.entities.filter(entity => entity.id === id);
-  }
-
   getEntitiesByComponent(name) {
     return this.entities.filter(entity => entity.hasComponent(name));
   }
 
-  getEntitiesByComponentType(Type) {
-    return this.entities.filter(entity => entity.hasComponentType(Type));
-  }
-
-  getEntitiesByComponentTypes(type) {
-    return this.entities.filter(entity => entity.hasComponentTypes(type));
-  }
-
-  getEntitiesByComponents(components) {
-    return this.entities
-      .filter(entity => entity.hasComponents(components));
-  }
-
-  getEntitiesComponents() {
-    return this.getEntitiesByComponents()
-      .map(entity => entity.components);
+  getEntitiesByComponents(type) {
+    return this.entities.filter(entity => entity.hasComponents(type));
   }
 }

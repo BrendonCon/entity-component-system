@@ -6,15 +6,7 @@ export class System {
   }
 
   get entities() {
-    return this.world.getEntitiesByComponentTypes(this.components);
-  }
-
-  play() {
-    this.active = true;
-  }
-
-  stop() {
-    this.active = false;
+    return this.world.getEntitiesByComponents(this.components);
   }
 
   init() {}

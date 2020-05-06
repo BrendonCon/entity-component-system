@@ -12,6 +12,10 @@ export class EulerSystem extends System {
     this.entities.forEach(entity => {
       let { transform, physicsBody } = entity.components;
 
+      physicsBody.angularVelocity.x += physicsBody.angularAcceleration.x;
+      physicsBody.angularVelocity.y += physicsBody.angularAcceleration.y;
+      physicsBody.angularVelocity.z += physicsBody.angularAcceleration.z;
+
       transform.rotation.x += physicsBody.angularVelocity.x;
       transform.rotation.y += physicsBody.angularVelocity.y;
       transform.rotation.z += physicsBody.angularVelocity.z;

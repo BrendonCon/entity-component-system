@@ -1,11 +1,12 @@
 import { System } from '../core/System.js';
 import { Transform } from './../components/Transform.js';
 import { Color } from './../components/Color.js';
+import { Sprite } from './../components/Sprite.js';
 
 export class CanvasRenderSystem extends System {
   constructor(canvas) {
     super();
-    this.components = [Transform, Color];
+    this.components = [Transform, Color, Sprite];
     this._canvas = canvas;
     this._opts = { alpha: false, depth: false, antialias: false, stencil: true };
     this._ctx = this._canvas.getContext('2d', this._opts);
@@ -32,22 +33,16 @@ export class CanvasRenderSystem extends System {
       let { transform, color, sprite } = entity.components;
       let position = transform.position;
       let scale = transform.scale;
-      
+      let w = sprite.image.width * transform.scale.x;
+      let h = sprite.image.height * transform.scale.y;
+
       this._bufferCtx.save();
-      this._bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
       this._bufferCtx.globalAlpha = Math.max(color.alpha, 0);
       this._bufferCtx.translate(position.x, position.y);
       this._bufferCtx.scale(scale.x, scale.y);
       this._bufferCtx.rotate(transform.rotation.x);
-
-      if (sprite && sprite.src && sprite.image.complete) {
-        let w = sprite.texture.width;
-        let h = sprite.texture.height;
-        this._bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
-      } else {
-        this._bufferCtx.fillRect(-10, -10, 20, 20);
-      }
       
+      this._bufferCtx.drawImage(sprite.image, - w * 0.5, - h * 0.5, w, h);
       this._bufferCtx.restore();
     });
 

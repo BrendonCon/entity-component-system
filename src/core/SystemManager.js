@@ -20,14 +20,6 @@ export class SystemManager {
     return (index != -1) && this._systems[index];
   }
 
-  getActiveSystems() {
-    return this._systems.filter(system => system.active);
-  }
-
-  getDeactivatedSystems() {
-    return this._systems.filter(system => !system.active);
-  }
-
   update(deltaTime, time) {
     this._updateSystems
       .filter(system => system.active)

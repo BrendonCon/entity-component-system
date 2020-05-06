@@ -12,10 +12,6 @@ export class World {
     this.active = true;
   }
 
-  createEntity() {
-    return this.entityManager.createEntity();
-  }
-
   addEntity(entity) {
     this.entityManager.addEntity(entity);
   }
@@ -28,32 +24,12 @@ export class World {
     return this.entityManager.getEntityCount();
   }
 
-  getEntitiesByComponents(components) {
-    return this.entityManager.getEntitiesByComponents(components);
-  }
-
-  getEntitiesByComponentTypes(types) {
-    return this.entityManager.getEntitiesByComponentTypes(types);
-  }
-
-  getActiveEntities() {
-    return this.entityManager.getActiveEntities();
+  getEntitiesByComponents(types) {
+    return this.entityManager.getEntitiesByComponents(types);
   }
 
   addSystem(system) {
     this.systemManager.addSystem(system, this);
-  }
-
-  removeSystem(system) {
-    this.systemManager.removeSystem(system);
-  }
-
-  play() {
-    this.active = true;
-  }
-
-  stop() {
-    this.active = false;
   }
 
   update(deltaTime, time) {
