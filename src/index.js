@@ -20,6 +20,10 @@ import { RandomPoisonSystem } from './systems/RandomPoisonSystem.js';
 let canvas = document.getElementById('canvas');
 window.world = new World();
 
+let stats = new Stats();
+stats.showPanel(0);
+document.body.appendChild(stats.dom);
+
 function setup() {
   let emitter = world.createEntity();
   let emission = new Emission();
@@ -58,8 +62,10 @@ function update(time) {
 function render() {}
 
 function loop(time = 0) {
+  stats.begin();
   update(time);
   render();
+  stats.end();
   requestAnimationFrame(loop);
 }
 
