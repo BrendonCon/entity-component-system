@@ -21,7 +21,6 @@ let canvas = document.getElementById('canvas');
 window.world = new World();
 
 let stats = new Stats();
-stats.showPanel(0);
 document.body.appendChild(stats.dom);
 
 function setup() {
