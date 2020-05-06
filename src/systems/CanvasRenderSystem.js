@@ -3,10 +3,9 @@ import { Transform } from './../components/Transform.js';
 import { Color } from './../components/Color.js';
 
 export class CanvasRenderSystem extends System {
-  components = [Transform, Color];
-
   constructor(canvas) {
     super();
+    this.components = [Transform, Color];
     this._canvas = canvas;
     this._opts = { alpha: false, depth: false, antialias: false, stencil: true };
     this._ctx = this._canvas.getContext('2d', this._opts);

@@ -4,7 +4,8 @@
   "description": "A learning experiment with entity component systems",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server"
+    "start": "lite-server",
+    "postinstall": "npm start"
   },
   "keywords": [],
   "author": "Brendon Conradie",

@@ -4,7 +4,10 @@ import { Emission } from './../components/Emission.js';
 import { Sprite } from './../components/Sprite.js';
 
 export class EmissionSystem extends System {
-  components = [Emission, Sprite];
+  constructor() {
+    super();
+    this.components = [Emission, Sprite];
+  }
 
   init() {
     this.entities.forEach(emitter => {

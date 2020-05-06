@@ -1,5 +1,8 @@
 import { Component } from './../core/Component.js';
 
 export class AlphaOverLife extends Component {
-  points = [];
+  constructor(points = []) {
+    super();
+    this.points = points;
+  }
 }
