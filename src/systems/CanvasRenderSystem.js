@@ -48,7 +48,7 @@ export default class CanvasRenderSystem extends System {
       this._bufferCtx.scale(scale.x, scale.y);
       this._bufferCtx.rotate(transform.rotation.x);
 
-      if (sprite && sprite.src && sprite.image.complete) {
+      if (sprite.src && sprite.image.complete) {
         const { width, height } = sprite.texture;
         this._bufferCtx.drawImage(sprite.texture, -width * 0.5, -height * 0.5, width, height);
       } else {

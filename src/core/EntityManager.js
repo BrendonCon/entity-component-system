@@ -7,11 +7,11 @@ export default class EntityManager {
   }
 
   get entities() {
-    return this._entities.filter((entity) => entity.active);
+    return this._entities.filter(entity => entity.active);
   }
 
   createEntity() {
-    return new Entity();
+    return new this._Entity();
   }
 
   addEntity(entity) {
