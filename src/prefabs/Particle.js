@@ -1,12 +1,12 @@
-import { Entity } from './../core/Entity.js';
-import { AlphaOverLife } from './../components/AlphaOverLife.js';
-import { Color } from './../components/Color.js';
-import { Transform } from './../components/Transform.js';
-import { PhysicsBody } from './../components/PhysicsBody.js';
-import { Life } from './../components/Life.js';
-import { Sprite } from './../components/Sprite.js';
+import Entity from '../core/Entity.js';
+import AlphaOverLife from '../components/AlphaOverLife.js';
+import Color from '../components/Color.js';
+import Transform from '../components/Transform.js';
+import PhysicsBody from '../components/PhysicsBody.js';
+import Life from '../components/Life.js';
+import Sprite from '../components/Sprite.js';
 
-export class Particle extends Entity {
+export default class Particle extends Entity {
   constructor() {
     super();
     this.active = false;

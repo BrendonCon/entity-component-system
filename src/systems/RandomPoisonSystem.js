@@ -1,7 +1,7 @@
-import { System } from './../core/System.js';
-import { Color } from './../components/Color.js';
+import System from '../core/System.js';
+import Color from '../components/Color.js';
 
-export class RandomPoisonSystem extends System {
+export default class RandomPoisonSystem extends System {
   constructor() {
     super();
     this.components = [Color];
@@ -28,6 +28,6 @@ export class RandomPoisonSystem extends System {
   setEntityColor(entity) {
     entity.components.color.r = 0;
     entity.components.color.g = 255;
-    entity.components.color.b = 0; 
+    entity.components.color.b = 0;
   }
 }

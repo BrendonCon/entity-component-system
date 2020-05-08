@@ -1,6 +1,4 @@
-export class Entity {
-  static id = 0;
-
+export default class Entity {
   constructor() {
     this.id = Entity.id++;
     this.name = '';
@@ -9,8 +7,8 @@ export class Entity {
   }
 
   addComponent(component) {
-    let protoName = component.constructor.name;
-    let name = `${protoName.charAt(0).toLowerCase()}${protoName.slice(1)}`;
+    const protoName = component.constructor.name;
+    const name = `${protoName.charAt(0).toLowerCase()}${protoName.slice(1)}`;
     this.components[name] = component;
   }
 
@@ -46,3 +44,5 @@ export class Entity {
     this.components[name] = null;
   }
 }
+
+Entity.prototype.id = 0;

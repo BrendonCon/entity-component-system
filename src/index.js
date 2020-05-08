@@ -1,39 +1,35 @@
-import { World } from './core/World.js';
+import World from './core/World.js';
 
-import { AlphaOverLife } from './components/AlphaOverLife.js';
-import { Transform } from './components/Transform.js';
-import { Sprite } from './components/Sprite.js';
-import { PhysicsBody } from './components/PhysicsBody.js';
-import { Emission } from './components/Emission.js';
-import { Mouse } from './components/Mouse.js';
+import Transform from './components/Transform.js';
+import Sprite from './components/Sprite.js';
+import Emission from './components/Emission.js';
+import AlphaOverLifeSystem from './systems/AlphaOverLifeSystem.js';
+import EulerSystem from './systems/EulerSystem.js';
+import EmissionSystem from './systems/EmissionSystem.js';
+import CanvasRenderSystem from './systems/CanvasRenderSystem.js';
+import MouseSystem from './systems/MouseSystem.js';
+import LifeSystem from './systems/LifeSystem.js';
+import SpriteSystem from './systems/SpriteSystem.js';
+import SpawnSystem from './systems/SpawnSystem.js';
+import RandomPoisonSystem from './systems/RandomPoisonSystem.js';
 
-import { AlphaOverLifeSystem } from './systems/AlphaOverLifeSystem.js';
-import { EulerSystem } from './systems/EulerSystem.js';
-import { EmissionSystem } from './systems/EmissionSystem.js';
-import { CanvasRenderSystem } from './systems/CanvasRenderSystem.js';
-import { MouseSystem } from './systems/MouseSystem.js';
-import { LifeSystem } from './systems/LifeSystem.js';
-import { SpriteSystem } from './systems/SpriteSystem.js';
-import { SpawnSystem } from './systems/SpawnSystem.js';
-import { RandomPoisonSystem } from './systems/RandomPoisonSystem.js';
+const canvas = document.getElementById('canvas');
+const world = new World();
 
-let canvas = document.getElementById('canvas');
-window.world = new World();
-
-let stats = new Stats();
+const stats = new window.Stats();
 document.body.appendChild(stats.dom);
 
 function setup() {
-  let emitter = world.createEntity();
-  let emission = new Emission();
+  const emitter = world.createEntity();
+  const emission = new Emission();
   emission.active = false;
   emitter.addComponent(emission);
   emitter.addComponent(new Sprite('./assets/circle_01.png'));
 
-  let t = new Transform();
-  t.position.x = window.innerWidth * 0.5;
-  t.position.y = window.innerHeight * 0.5;
-  emitter.addComponent(t);
+  const transform = new Transform();
+  transform.position.x = window.innerWidth * 0.5;
+  transform.position.y = window.innerHeight * 0.5;
+  emitter.addComponent(transform);
   world.addEntity(emitter);
 
   world.addSystem(new EulerSystem());
@@ -47,7 +43,7 @@ function setup() {
   world.addSystem(new RandomPoisonSystem());
 }
 
-let prevTime = 0;  
+let prevTime = 0;
 let currentTime = 0;
 let deltaTime = 0;
 
@@ -71,4 +67,4 @@ function loop(time = 0) {
 (function main() {
   setup();
   loop();
-})();
+}());

@@ -1,12 +1,13 @@
-import { Entity } from './Entity.js';
+import Entity from './Entity.js';
 
-export class EntityManager {
+export default class EntityManager {
   constructor() {
     this._entities = [];
+    this._Entity = Entity;
   }
 
   get entities() {
-    return this._entities.filter(entity => entity.active);
+    return this._entities.filter((entity) => entity.active);
   }
 
   createEntity() {

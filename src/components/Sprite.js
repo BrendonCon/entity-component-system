@@ -1,6 +1,6 @@
-import { Component } from './../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Sprite extends Component {
+export default class Sprite extends Component {
   constructor() {
     super();
     this.src = '';

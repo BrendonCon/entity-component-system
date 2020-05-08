@@ -1,4 +1,4 @@
-export class SystemManager {
+export default class SystemManager {
   constructor() {
     this._systems = [];
     this._updateSystems = [];
@@ -7,7 +7,7 @@ export class SystemManager {
   addSystem(system, world) {
     system.world = world;
     system.init();
-    system.update && this._updateSystems.push(system);
+    if (system.update) this._updateSystems.push(system);
     this._systems.push(system);
   }
 
@@ -16,8 +16,8 @@ export class SystemManager {
   }
 
   getSystem(system) {
-    let index = this.getSystemIndex(system);
-    return (index != -1) && this._systems[index];
+    const index = this.getSystemIndex(system);
+    return (index !== -1) && this._systems[index];
   }
 
   getActiveSystems() {

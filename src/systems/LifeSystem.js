@@ -1,7 +1,7 @@
-import { System } from './../core/System.js';
-import { Life } from './../components/Life.js';
+import System from '../core/System.js';
+import Life from '../components/Life.js';
 
-export class LifeSystem extends System {
+export default class LifeSystem extends System {
   constructor() {
     super();
     this.components = [Life];
@@ -9,7 +9,7 @@ export class LifeSystem extends System {
 
   update(deltaTime) {
     this.entities.forEach(entity => {
-      let { life } = entity.components;
+      const { life } = entity.components;
 
       if (life.currentLife > 0) {
         life.currentLife -= deltaTime * life.multiplier;

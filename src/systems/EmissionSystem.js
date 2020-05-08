@@ -1,9 +1,9 @@
-import { System } from './../core/System.js';
-import { Particle } from './../prefabs/Particle.js';
-import { Emission } from './../components/Emission.js';
-import { Sprite } from './../components/Sprite.js';
+import System from '../core/System.js';
+import Particle from '../prefabs/Particle.js';
+import Emission from '../components/Emission.js';
+import Sprite from '../components/Sprite.js';
 
-export class EmissionSystem extends System {
+export default class EmissionSystem extends System {
   constructor() {
     super();
     this.components = [Emission, Sprite];
@@ -11,35 +11,33 @@ export class EmissionSystem extends System {
 
   init() {
     this.entities.forEach(emitter => {
-      let emission = emitter.components.emission;
-      let emitterTransform = emitter.components.transform;
-      let emitterSprite = emitter.components.sprite;
+      const { emission } = emitter.components;
+      const emitterTransform = emitter.components.transform;
+      const emitterSprite = emitter.components.sprite;
 
       emission.startIndex = this.world.getEntityCount();
 
       for (let i = 0; i < emission.particleCount; i++) {
-        let particle = new Particle();
-        let particleComponents = particle.components;
-        let particleTransform = particleComponents.transform;    
-        let particlePhysicsBody = particleComponents.physicsBody;
-        let particleLife = particleComponents.life;
-        let particleSprite = particleComponents.sprite;
+        const particle = new Particle();
+        const particleComponents = particle.components;
+        const particleTransform = particleComponents.transform;
+        const particlePhysicsBody = particleComponents.physicsBody;
+        const particleLife = particleComponents.life;
+        const particleSprite = particleComponents.sprite;
 
         particle.active = false;
-
         particleSprite.src = emitterSprite.src;
         particleSprite.texture = emitterSprite.texture;
-  
         particleLife.currentLife = Math.random() * 5000;
         particleLife.maxLife = particleLife.currentLife;
 
-        let theta = 6.28 * Math.random();
+        const theta = 6.28 * Math.random();
         particlePhysicsBody.velocity.x = Math.cos(theta);
         particlePhysicsBody.velocity.y = Math.sin(theta);
 
         particleTransform.position.x = emitterTransform.position.x;
         particleTransform.position.y = emitterTransform.position.y;
-        
+
         this.world.addEntity(particle);
       }
 
@@ -49,20 +47,19 @@ export class EmissionSystem extends System {
 
   update(deltaTime) {
     this.entities.forEach(emitter => {
-      let { emission } = emitter.components;
+      const { emission } = emitter.components;
 
       emission.elapsed += deltaTime * emission.speed;
 
       if (emission.elapsed >= emission.rate) {
-        let emitterTransform = emitter.components.transform;
-        let entities = this.world.getAllEntities();
-        let startIndex = emission.startIndex;
-        let endIndex = emission.endIndex;
+        const emitterTransform = emitter.components.transform;
+        const entities = this.world.getAllEntities();
 
-        let index = startIndex + (emission.index++ % (endIndex - startIndex));
-        let particle = entities[index];
-        let { transform, life } = particle.components;
-        
+        const { startIndex, endIndex } = emission;
+        const index = startIndex + (emission.index++ % (endIndex - startIndex));
+        const particle = entities[index];
+        const { transform, life } = particle.components;
+
         life.currentLife = life.maxLife;
         particle.active = true;
 

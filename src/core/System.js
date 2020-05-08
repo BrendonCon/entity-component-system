@@ -1,4 +1,4 @@
-export class System {
+export default class System {
   constructor() {
     this.world = undefined;
     this.active = true;
@@ -18,5 +18,6 @@ export class System {
   }
 
   init() {}
+
   destroy() {}
 }

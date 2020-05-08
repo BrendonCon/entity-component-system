@@ -1,22 +1,25 @@
-import { System } from '../core/System.js';
-import { Mouse } from '../components/Mouse.js';
-import { Transform } from '../components/Transform.js';
+import System from '../core/System.js';
+import Mouse from '../components/Mouse.js';
+import Transform from '../components/Transform.js';
 
-export class MouseSystem extends System {
+export default class MouseSystem extends System {
   constructor() {
     super();
     this.components = [Mouse, Transform];
   }
 
   init() {
-    window.addEventListener('mousemove', (e) => this.setMouseCoords(e));
+    window.addEventListener('mousemove', (event) => this.setMouseCoords(event));
   }
 
-  setMouseCoords(e) {
+  setMouseCoords(event) {
     this.entities.forEach(entity => {
-      let { mouse, transform } = entity.components;
-      mouse.x = transform.position.x = e.clientX;
-      mouse.y = transform.position.y = e.clientY;
+      const { mouse, transform } = entity.components;
+      const { clientX, clientY } = event;
+      mouse.x = clientX;
+      mouse.y = clientY;
+      transform.position.x = clientX;
+      transform.position.y = clientY;
     });
   }
 

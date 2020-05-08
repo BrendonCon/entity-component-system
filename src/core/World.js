@@ -1,9 +1,9 @@
-import { EntityManager } from './EntityManager.js';
-import { ComponentManager } from './ComponentManager.js';
-import { SystemManager } from './SystemManager.js';
-import { EventManager } from './EventManager.js';
+import EntityManager from './EntityManager.js';
+import ComponentManager from './ComponentManager.js';
+import SystemManager from './SystemManager.js';
+import EventManager from './EventManager.js';
 
-export class World {
+export default class World {
   constructor() {
     this.entityManager = new EntityManager();
     this.componentManager = new ComponentManager();
@@ -57,6 +57,8 @@ export class World {
   }
 
   update(deltaTime, time) {
-    this.active && this.systemManager.update(deltaTime, time);
+    if (this.active) {
+      this.systemManager.update(deltaTime, time);
+    }
   }
 }

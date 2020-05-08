@@ -1,13 +1,18 @@
-import { System } from '../core/System.js';
-import { Transform } from './../components/Transform.js';
-import { Color } from './../components/Color.js';
+import System from '../core/System.js';
+import Transform from '../components/Transform.js';
+import Color from '../components/Color.js';
 
-export class CanvasRenderSystem extends System {
+export default class CanvasRenderSystem extends System {
   constructor(canvas) {
     super();
+    this._opts = {
+      alpha: false,
+      depth: false,
+      antialias: false,
+      stencil: true
+    };
     this.components = [Transform, Color];
     this._canvas = canvas;
-    this._opts = { alpha: false, depth: false, antialias: false, stencil: true };
     this._ctx = this._canvas.getContext('2d', this._opts);
     this._buffer = document.createElement('canvas');
     this._bufferCtx = this._buffer.getContext('2d', this._opts);
@@ -21,18 +26,21 @@ export class CanvasRenderSystem extends System {
   }
 
   setDimensions() {
-    this._buffer.width = this._canvas.width = this.width = window.innerWidth;
-    this._buffer.height = this._canvas.height = this.height = window.innerHeight;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this._buffer.width = this.width;
+    this._buffer.height = this.height;
+    this._canvas.width = this.width;
+    this._canvas.height = this.height;
   }
 
   update() {
     this._bufferCtx.fillRect(0, 0, this.width, this.height);
 
     this.entities.forEach(entity => {
-      let { transform, color, sprite } = entity.components;
-      let position = transform.position;
-      let scale = transform.scale;
-      
+      const { transform, color, sprite } = entity.components;
+      const { scale, position } = transform;
+
       this._bufferCtx.save();
       this._bufferCtx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
       this._bufferCtx.globalAlpha = Math.max(color.alpha, 0);
@@ -41,13 +49,12 @@ export class CanvasRenderSystem extends System {
       this._bufferCtx.rotate(transform.rotation.x);
 
       if (sprite && sprite.src && sprite.image.complete) {
-        let w = sprite.texture.width;
-        let h = sprite.texture.height;
-        this._bufferCtx.drawImage(sprite.texture, - w * 0.5, - h * 0.5, w, h);
+        const { width, height } = sprite.texture;
+        this._bufferCtx.drawImage(sprite.texture, -width * 0.5, -height * 0.5, width, height);
       } else {
         this._bufferCtx.fillRect(-10, -10, 20, 20);
       }
-      
+
       this._bufferCtx.restore();
     });
 

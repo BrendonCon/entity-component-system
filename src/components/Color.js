@@ -1,6 +1,6 @@
-import { Component } from './../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Color extends Component {
+export default class Color extends Component {
   constructor(opts = {}) {
     super();
     this.r = opts.r || 255;
