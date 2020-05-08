@@ -1,4 +1,6 @@
 export default class Entity {
+  static id = 0;
+
   constructor() {
     this.id = Entity.id++;
     this.name = '';
@@ -44,5 +46,3 @@ export default class Entity {
     this.components[name] = null;
   }
 }
-
-Entity.prototype.id = 0;

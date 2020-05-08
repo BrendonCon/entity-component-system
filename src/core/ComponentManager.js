@@ -42,28 +42,3 @@ export default class ComponentManager {
     Object.keys(entity.components).forEach(this.removeComponent);
   }
 }
-
-// class Component {
-//   constructor(id) {
-//     this.id = id;
-//     this.r = Math.random();
-//   }
-// }
-
-// let components = {
-//   position: [new Component(2), new Component(3)],
-//   velocity: [new Component(1), new Component(2), new Component(4)],
-//   acceleration: [new Component(1), new Component(4)]
-// };
-
-// let id = 2;
-
-// let e = Object.values(components)
-//   .map(component => {
-//     return component.filter(component => component.id === id);
-//   })
-//   .filter(component => {
-//     return component.length;
-//   });
-
-// console.log(e);
