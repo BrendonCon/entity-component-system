@@ -1,9 +1,9 @@
-import { Entity } from './../core/Entity.js';
-import { Color } from './../components/Color.js';
-import { Transform } from './../components/Transform.js';
-import { PhysicsBody } from './../components/PhysicsBody.js';
+import Entity from '../core/Entity.js';
+import Color from '../components/Color.js';
+import Transform from '../components/Transform.js';
+import PhysicsBody from '../components/PhysicsBody.js';
 
-export class Enemy extends Entity {
+export default class Enemy extends Entity {
   constructor() {
     super();
     this.addComponent(new Color());

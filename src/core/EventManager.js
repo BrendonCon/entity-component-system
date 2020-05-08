@@ -1,16 +1,16 @@
-export class EventManager {
+export default class EventManager {
   constructor() {
     this._events = {};
   }
 
   subscribe(name, fn) {
-    !this._events[name] && (this._events[name] = []);
+    if (!this._events[name]) (this._events[name] = []);
     this._events[name].push(fn);
   }
 
   unsubscribe(name, fn) {
-    let index = this._events[name].indexOf(fn);
-    (index != -1) && (this._events[name].splice(index, 1));
+    const index = this._events[name].indexOf(fn);
+    if (index !== -1) this._events[name].splice(index, 1);
   }
 
   publish(name, data) {
@@ -19,7 +19,7 @@ export class EventManager {
   }
 
   getListenerCount(name) {
-    return this._events[name] && this._events[name].length || -1;
+    return this._events[name] ? this._events[name].length : -1;
   }
 
   getTotalListenerCount() {

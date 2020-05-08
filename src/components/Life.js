@@ -1,6 +1,6 @@
-import { Component } from './../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Life extends Component {
+export default class Life extends Component {
   constructor() {
     super();
     this.currentLife = 3000;

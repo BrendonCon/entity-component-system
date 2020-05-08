@@ -1,6 +1,6 @@
-import { Component } from '../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Emission extends Component {
+export default class Emission extends Component {
   constructor() {
     super();
     this.particleCount = 25;

@@ -1,3 +1,3 @@
-import { Component } from './../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Particle extends Component {}
+export default class Particle extends Component {}

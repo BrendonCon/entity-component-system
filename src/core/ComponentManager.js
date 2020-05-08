@@ -1,12 +1,12 @@
 // TODO: Figure this out!!
-export class ComponentManager {
+export default class ComponentManager {
   constructor() {
-    this._Components = {};
+    this._Components = { };
   }
 
   registerComponent(Component) {
     this._Components[Component] = Component;
-  } 
+  }
 
   addComponent(entity, component) {
     entity.components[component.name] = component;

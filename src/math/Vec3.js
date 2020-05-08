@@ -1,4 +1,4 @@
-export class Vec3 {
+export default class Vec3 {
   constructor(x = 0, y = x, z = x) {
     this.x = x;
     this.y = y;
@@ -14,7 +14,7 @@ export class Vec3 {
   sub(v) {
     this.x -= v.x;
     this.y -= v.y;
-    this.z -= v.z;   
+    this.z -= v.z;
   }
 
   mult(s) {
@@ -26,7 +26,7 @@ export class Vec3 {
   div(d) {
     this.x /= d;
     this.y /= d;
-    this.z /= d;   
+    this.z /= d;
   }
 
   dot(v) {

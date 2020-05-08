@@ -1,7 +1,7 @@
-import { Component } from './../core/Component.js';
-import { Vec3 } from './../math/Vec3.js';
+import Component from '../core/Component.js';
+import Vec3 from '../math/Vec3.js';
 
-export class PhysicsBody extends Component {
+export default class PhysicsBody extends Component {
   constructor() {
     super();
     this.mass = 1;

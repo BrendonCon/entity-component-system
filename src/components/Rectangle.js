@@ -1,6 +1,6 @@
-import { Component } from './../core/Component.js';
+import Component from '../core/Component.js';
 
-export class Rectangle extends Component {
+export default class Rectangle extends Component {
   constructor(width = 20, height = width) {
     super();
     this.width = width;

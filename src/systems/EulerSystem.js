@@ -1,16 +1,16 @@
-import { System } from '../core/System.js';
-import { Transform } from '../components/Transform.js';
-import { PhysicsBody } from '../components/PhysicsBody.js';
+import System from '../core/System.js';
+import Transform from '../components/Transform.js';
+import PhysicsBody from '../components/PhysicsBody.js';
 
-export class EulerSystem extends System {
+export default class EulerSystem extends System {
   constructor() {
     super();
     this.components = [Transform, PhysicsBody];
   }
 
-  update(deltaTime, time) {
+  update() {
     this.entities.forEach(entity => {
-      let { transform, physicsBody } = entity.components;
+      const { transform, physicsBody } = entity.components;
 
       transform.rotation.x += physicsBody.angularVelocity.x;
       transform.rotation.y += physicsBody.angularVelocity.y;

@@ -1,4 +1,4 @@
-export class Polar2D {
+export default class Polar2D {
   constructor(radius = 0, theta = 0) {
     this.radius = radius;
     this.theta = theta;

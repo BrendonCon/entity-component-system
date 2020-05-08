@@ -1,4 +1,4 @@
-export class Vec4 {
+export default class Vec4 {
   constructor(x = 0, y = x, z = x, w = x) {
     this.x = x;
     this.y = y;
@@ -17,7 +17,7 @@ export class Vec4 {
     this.x -= v.x;
     this.y -= v.y;
     this.z -= v.z;
-    this.w -= v.w;   
+    this.w -= v.w;
   }
 
   mult(s) {
@@ -30,8 +30,8 @@ export class Vec4 {
   div(d) {
     this.x /= d;
     this.y /= d;
-    this.z /= d; 
-    this.w /= d;  
+    this.z /= d;
+    this.w /= d;
   }
 
   dot(v) {

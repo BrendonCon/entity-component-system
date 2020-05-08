@@ -1,9 +1,9 @@
-import { Entity } from '../core/Entity.js';
-import { Transform } from '../components/Transform.js';
-import { Emission } from '../components/Emission.js';
-import { PhysicsBody } from '../components/PhysicsBody.js';
+import Entity from '../core/Entity.js';
+import Transform from '../components/Transform.js';
+import Emission from '../components/Emission.js';
+import PhysicsBody from '../components/PhysicsBody.js';
 
-export class Emitter extends Entity {
+export default class Emitter extends Entity {
   constructor() {
     super();
     this.addComponent(new Emission());

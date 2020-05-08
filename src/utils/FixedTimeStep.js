@@ -1,4 +1,4 @@
-export class FixedTimeStep {
+export default class FixedTimeStep {
   constructor(opts = {}) {
     this.fps = opts.fps || 60;
     this.frameDelta = 1000 / this.fps;
@@ -9,7 +9,7 @@ export class FixedTimeStep {
     this.update = opts.update || (() => {});
     this.raf = undefined;
   }
-  
+
   loop() {
     this.raf = requestAnimationFrame(deltaTime => this.step(deltaTime));
   }
@@ -26,6 +26,6 @@ export class FixedTimeStep {
     while (this.accumulator > this.frameDelta) {
       this.update(this.frameDelta);
       this.accumulator -= this.frameDelta;
-    } 
+    }
   }
 }
