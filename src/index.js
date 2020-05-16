@@ -3,6 +3,7 @@ import World from './core/World.js';
 import Transform from './components/Transform.js';
 import Sprite from './components/Sprite.js';
 import Emission from './components/Emission.js';
+
 import AlphaOverLifeSystem from './systems/AlphaOverLifeSystem.js';
 import EulerSystem from './systems/EulerSystem.js';
 import EmissionSystem from './systems/EmissionSystem.js';
