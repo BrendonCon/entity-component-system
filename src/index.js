@@ -55,12 +55,9 @@ function update(time) {
   world.update(deltaTime, time);
 }
 
-function render() {}
-
 function loop(time = 0) {
   stats.begin();
   update(time);
-  render();
   stats.end();
   requestAnimationFrame(loop);
 }
