@@ -1,34 +1,86 @@
+/** Class to create object pools */
 export default class ObjectPool {
-  constructor(Class, count) {
-    this.Class = Class;
-    this.count = count;
-    this.pool = [];
-    this.freeIndex = -1;
-    this.preallocate(Class, count);
+  /**
+   * Constructs a new objectPool
+   * @param {object} Type - Type to pool
+   * @param {number} size - Size of the object pool
+   */
+  constructor(Type, size) {
+    this.Type = Type;
+    this.size = size;
+    this.freeIndex = 0;
+    this.nextFreeIndex = -1;
+    this.pool = new Array(this.size);
   }
 
-  preallocate(Class = this.Class, count) {
-    this.freeIndex = count;
-
-    for (let i = 0; i < count; i++) {
-      this.pool.push(new Class());
+  /**
+   * Initializes object pool
+   * @return {void}
+   */
+  init() {
+    for (let i = 0; i < this.size; i++) {
+      this.pool[i] = new this.Type();
     }
   }
 
-  allocate() {
-    if (!this.freeIndex) {
-      throw new Error('Grow your object pool!');
+  /**
+   * Gets a fee object form the pool and grows the pool if needed
+   * @return {object} a new object from the pool
+   */
+  get() {
+    if (this.nextFreeIndex !== -1) {
+      const obj = this.pool[this.nextFreeIndex];
+      this.nextFreeIndex = -1;
+      return obj;
     }
 
-    return this.pool[this.pool.length - this.freeIndex--];
+    if (this.freeIndex >= this.size) this.grow();
+
+    return this.pool[this.freeIndex++];
   }
 
-  deallocate(obj) {
-    this.pool[this.freeIndex++] = obj;
+  /**
+   * frees an object available for use
+   * @param {object} obj - object to be freed back to the pool
+   * @return {void}
+   */
+  free(obj) {
+    const index = this.pool.indexOf(obj);
+
+    if (index !== -1) {
+      this.nextFreeIndex = index;
+    }
   }
 
-  clear() {
+  /**
+   * Grows the object pool by the input amount
+   * @param {number} newSize - additional size to grow the pool by
+   * @return {void}
+   */
+  grow(newSize = 100) {
+    for (let i = this.size; i < this.size + newSize - 1; i++) {
+      this.pool[i] = new this.Type();
+    }
+
+    this.size += newSize;
+  }
+
+  /**
+   * Gets the current size of the pool
+   * @return {number} - pool size
+   */
+  getSize() {
+    return this.size;
+  }
+
+  /**
+   * Resets the object pool to an empty state
+   * @return {void}
+   */
+  reset() {
     this.pool.length = 0;
-    this.freeIndex = -1;
+    this.size = 0;
+    this.freeIndex = 0;
+    this.nextFreeIndex = -1;
   }
 }
